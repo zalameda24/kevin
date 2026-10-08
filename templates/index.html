@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Interview Coach</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <div class="orb orb-one" aria-hidden="true"></div>
+  <div class="orb orb-two" aria-hidden="true"></div>
+  <header class="topbar glass">
+    <div>
+      <p class="eyebrow">Gemini-powered practice</p>
+      <h1>AI Interview Coach</h1>
+    </div>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+      <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
+      <span id="theme-label">Light</span>
+    </button>
+  </header>
+  <main class="page-shell">
+    <section class="hero glass fade-up">
+      <div>
+        <p class="eyebrow">Practice with purpose</p>
+        <h2>Turn every answer into a stronger interview story.</h2>
+        <p class="muted">Choose a role and difficulty, answer one focused question, then review structured coaching.</p>
+      </div>
+      <div class="session-summary" aria-label="Session progress">
+        <div><strong id="session-count">0</strong><span>Attempts</span></div>
+        <div><strong id="average-score">0.0</strong><span>Average</span></div>
+      </div>
+    </section>
+    <section class="workspace">
+      <article class="glass panel controls-panel fade-up delay-one">
+        <div class="section-heading">
+          <p class="eyebrow">Step 1</p>
+          <h2>Choose your interview</h2>
+        </div>
+        <label for="profession">Profession</label>
+        <select id="profession">
+          <option>Software Engineer</option>
+          <option>Data Analyst</option>
+          <option>Product Manager</option>
+          <option>Cybersecurity Analyst</option>
+          <option>Cloud Engineer</option>
+        </select>
+        <label for="mode">Difficulty</label>
+        <select id="mode">
+          <option>Easy</option>
+          <option selected>Standard</option>
+          <option>Advanced</option>
+        </select>
+        <button id="generate-button" class="primary-button" type="button">Generate Question</button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </article>
+      <article class="glass panel practice-panel fade-up delay-two">
+        <div id="empty-state" class="empty-state">
+          <p class="eyebrow">Step 2</p>
+          <h2>Your question will appear here</h2>
+          <p class="muted">Generate a question to begin a focused practice round.</p>
+        </div>
+        <div id="question-panel" hidden>
+          <div class="question-meta">
+            <span id="question-category" class="pill"></span>
+            <span id="question-mode" class="pill subtle"></span>
+          </div>
+          <h2 id="question-text"></h2>
+          <label for="answer">Your answer</label>
+          <textarea id="answer" maxlength="5000" placeholder="Write a clear, evidence-based response..."></textarea>
+          <div class="answer-actions">
+            <span class="muted small">Keep it concise and specific.</span>
+            <button id="evaluate-button" class="primary-button" type="button">Evaluate Answer</button>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section id="feedback-panel" class="glass panel feedback-panel fade-up" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">Coaching report</p>
+        <h2 id="feedback-summary"></h2>
+      </div>
+      <div id="score-grid" class="score-grid"></div>
+      <div class="feedback-grid">
+        <div>
+          <h3>Strengths</h3>
+          <ul id="strengths-list"></ul>
+        </div>
+        <div>
+          <h3>Improve next</h3>
+          <ul id="improvements-list"></ul>
+        </div>
+      </div>
+      <div class="improved-answer">
+        <h3>Stronger answer</h3>
+        <p id="improved-answer"></p>
+      </div>
+    </section>
+    <section class="glass panel history-panel fade-up">
+      <div class="section-heading">
+        <p class="eyebrow">Current tab</p>
+        <h2>Practice history</h2>
+      </div>
+      <div id="history-list" class="history-list">
+        <p class="muted">No completed attempts yet.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
