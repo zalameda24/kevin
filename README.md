@@ -1,70 +1,70 @@
 # AI Interview Coach with Gemini
 
-An AI-powered interview practice application built with Flask, Google Gemini AI (`gemini-2.5-flash`), and a glassmorphic dashboard interface.
+An interview practice application built with Flask, Google Gemini AI (`gemini-2.5-flash`), and a glassmorphic dashboard interface.
 
 ---
 
-## 📋 Features
+## Features
 
-- **Tailored Practice:** Select a profession (*Software Engineer, Data Analyst, Product Manager, Cybersecurity Analyst, Cloud Engineer*) and difficulty (*Easy, Standard, Advanced*).
-- **Structured Coaching Report:** Evaluates your answers on 4 key metrics (*Communication, Confidence, Technical Depth, Problem Solving*) with score bars (1-10), strengths, areas for improvement, and a rewritten stronger response.
+- **Tailored Practice:** Select a profession (Software Engineer, Data Analyst, Product Manager, Cybersecurity Analyst, Cloud Engineer) and difficulty (Easy, Standard, Advanced).
+- **Structured Coaching Report:** Evaluates your answers on 4 key metrics (Communication, Confidence, Technical Depth, Problem Solving) with score bars (1-10), strengths, areas for improvement, and a rewritten stronger response.
 - **Session History & Analytics:** Tracks total practice attempts and computes overall average score.
-- **Persistent Light / Dark Theme:** Smooth glassmorphic UI with saved theme preferences.
+- **Persistent Light / Dark Theme:** Glassmorphic UI with saved theme preferences.
 
 ---
 
-## 🚀 Step-by-Step Setup & Running Guide (Based on the PDF Manual)
+## Setup and Running Guide
 
 ### Step 1: Open Project in VS Code
 Open the project directory in Visual Studio Code (`File` > `Open Folder...`).
 
 ### Step 2: Open PowerShell Terminal
-In VS Code, press `Ctrl + ~` or go to **Terminal > New Terminal**.
+In VS Code, press `Ctrl + ~` or navigate to **Terminal > New Terminal**.
 
-### Step 3: Create & Activate Virtual Environment
+### Step 3: Create and Activate Virtual Environment
 ```powershell
 python -m venv .venv
 ```
+
 Allow script execution (if not yet enabled):
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
+
 Activate the virtual environment:
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
-*(You will see `(.venv)` at the beginning of your terminal prompt).*
 
 ### Step 4: Install Dependencies
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-### Step 5: Set up your Gemini API Key
-1. Get a free API key from [Google AI Studio](https://aistudio.google.com/apikey).
-2. Set it in your PowerShell terminal:
+### Step 5: Set up Gemini API Key
+1. Obtain an API key from Google AI Studio (https://aistudio.google.com/apikey).
+2. Set it in your PowerShell session:
    ```powershell
    $Env:GEMINI_API_KEY = "your-actual-api-key-here"
    ```
-   *(Or create a `.env` file in the project root containing `GEMINI_API_KEY=your-actual-api-key-here`).*
-3. Test if the key is recognized:
+   *(Alternatively, create a `.env` file containing `GEMINI_API_KEY=your-actual-api-key-here`).*
+3. Verify that the variable exists:
    ```powershell
    Test-Path Env:GEMINI_API_KEY
    ```
-   *(It will return `True`).*
 
-### Step 6: Start the Flask Development Server
+### Step 6: Start the Development Server
 ```powershell
 flask --app app.py run --debug
 ```
 
-### Step 7: Open the Application
+### Step 7: Access the Application
 Open your web browser and navigate to:
-👉 **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
+http://127.0.0.1:5000
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── .venv/                      # Python virtual environment (ignored in git)
@@ -77,6 +77,6 @@ Open your web browser and navigate to:
 ├── templates/
 │   └── index.html              # Frontend HTML structure
 └── static/
-    ├── style.css               # Glassmorphism design system & responsive layout
+    ├── style.css               # Design system and responsive layout
     └── app.js                  # Frontend state management & API communication
 ```
