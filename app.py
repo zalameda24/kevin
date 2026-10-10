@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from google import genai
 
 app = Flask(__name__)
-MODEL_ID = "gemini-2.5-flash"
+MODEL_ID = "gemini-3.8-flash"
 VALID_PROFESSIONS = {
     "Software Engineer",
     "Data Analyst",
