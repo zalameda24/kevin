@@ -1,18 +1,9 @@
 import json
-import os
 from flask import Flask, render_template, request
 from google import genai
 
 app = Flask(__name__)
 MODEL_ID = "gemini-2.5-flash"
-
-if os.path.exists(".env"):
-    with open(".env", "r", encoding="utf-8") as f:
-        for line in f:
-            if line.strip().startswith("GEMINI_API_KEY="):
-                os.environ["GEMINI_API_KEY"] = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
-                break
-
 VALID_PROFESSIONS = {
     "Software Engineer",
     "Data Analyst",
@@ -76,7 +67,7 @@ EVALUATION_SCHEMA = {
                     "description": "Quality of reasoning, decisions, trade-offs, and outcomes.",
                 },
             },
-            "required": SCORE_KEYS,
+            "required": list(SCORE_KEYS),
             "additionalProperties": False,
         },
         "strengths": {
