@@ -5,13 +5,14 @@ from google import genai
 
 app = Flask(__name__)
 MODEL_ID = "gemini-2.5-flash"
-API_KEY = os.environ.get("GEMINI_API_KEY")
-if not API_KEY and os.path.exists(".env"):
+
+if os.path.exists(".env"):
     with open(".env", "r", encoding="utf-8") as f:
         for line in f:
             if line.strip().startswith("GEMINI_API_KEY="):
-                API_KEY = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+                os.environ["GEMINI_API_KEY"] = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
                 break
+
 VALID_PROFESSIONS = {
     "Software Engineer",
     "Data Analyst",
@@ -75,7 +76,7 @@ EVALUATION_SCHEMA = {
                     "description": "Quality of reasoning, decisions, trade-offs, and outcomes.",
                 },
             },
-            "required": list(SCORE_KEYS),
+            "required": SCORE_KEYS,
             "additionalProperties": False,
         },
         "strengths": {
@@ -107,7 +108,7 @@ EVALUATION_SCHEMA = {
 
 
 def call_gemini(prompt, schema):
-    with genai.Client(api_key=API_KEY) as client:
+    with genai.Client() as client:
         interaction = client.interactions.create(
             model=MODEL_ID,
             input=prompt,
@@ -139,7 +140,7 @@ def index():
 
 @app.post("/api/question")
 def create_question():
-    payload = request.json or {}
+    payload = request.json
     profession = str(payload.get("profession", "")).strip()
     mode = str(payload.get("mode", "")).strip()
     if profession not in VALID_PROFESSIONS or mode not in VALID_MODES:
@@ -168,7 +169,7 @@ Keep the question concise and do not include an answer, hints, or scoring guidan
 
 @app.post("/api/evaluate")
 def evaluate_answer():
-    payload = request.json or {}
+    payload = request.json
     profession = str(payload.get("profession", "")).strip()
     mode = str(payload.get("mode", "")).strip()
     question = str(payload.get("question", "")).strip()
@@ -224,7 +225,3 @@ Candidate submission JSON:
         return {
             "error": "Evaluation failed. Check the API key, model access, and network connection."
         }, 502
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
